@@ -7,8 +7,9 @@ from DataBase.mariadb.client import MariadbClient
 
 
 @fixture(scope='session', name='connect')
-def create_connect():
+def create_connect(request):
     conn = MariadbClient()
+    request.addfinalizer(conn.close())
     return conn
 
 
